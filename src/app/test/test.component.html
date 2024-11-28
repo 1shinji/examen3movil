@@ -1,0 +1,13 @@
+<div>
+  <h2>SQLite Test Component</h2>
+
+  <!-- Botones para agregar y obtener usuarios -->
+  <button (click)="addUser()">Add User</button>
+  <button (click)="getUser()">Get User</button>
+
+  <!-- Muestra los datos del usuario si están disponibles -->
+  <div *ngIf="userData">
+    <h3>User Data:</h3>
+    <pre>{{ userData | json }}</pre>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Geolocalización</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2>Ubicación Actual</h2>
+  <p *ngIf="latitude && longitude">
+    Latitude: {{ latitude }}<br>
+    Longitude: {{ longitude }}
+  </p>
+  <ion-button (click)="getCurrentLocation()">Actualizar Ubicación</ion-button>
+</ion-content>
