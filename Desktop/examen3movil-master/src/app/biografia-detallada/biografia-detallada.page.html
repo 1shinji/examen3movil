@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/biografias"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ artista?.nombre }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="artista-header">
+    <img [src]="artista?.imagen" alt="{{ artista?.nombre }}" class="artista-imagen" />
+    <h1>{{ artista?.nombre }}</h1>
+    <p class="descripcion">{{ artista?.descripcion }}</p>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Biografía</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngIf="!mostrarBiografia">{{ artista?.biografia | slice:0:200 }}...</p>
+      <p *ngIf="mostrarBiografia">{{ artista?.biografia }}</p>
+      <ion-button expand="block" color="medium" (click)="toggleBiografia()">
+        {{ mostrarBiografia ? 'Leer Menos' : 'Leer Más' }}
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Logros Destacados</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ul>
+        <li *ngFor="let logro of artista?.logros">{{ logro }}</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="acciones">
+    <ion-button expand="block" color="success" (click)="escucharMusica()">
+      <ion-icon slot="start" name="musical-notes"></ion-icon> Escuchar en Spotify
+    </ion-button>
+  </div>
+</ion-content>

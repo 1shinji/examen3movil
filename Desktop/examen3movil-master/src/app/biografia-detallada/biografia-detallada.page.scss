@@ -1,0 +1,26 @@
+.artista-header {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .artista-imagen {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px auto;
+  }
+  
+  .descripcion {
+    font-style: italic;
+    color: #666;
+  }
+  
+  .acciones {
+    margin: 20px;
+    text-align: center;
+  }
+  
+  ion-card {
+    margin: 20px;
+  }  

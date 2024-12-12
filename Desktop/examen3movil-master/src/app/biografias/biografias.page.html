@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Biografías</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="6" size-md="4" *ngFor="let artista of artistas">
+        <ion-card (click)="verBiografia(artista)" class="artist-card">
+          <img [src]="artista.imagen" alt="{{ artista.nombre }}" />
+          <ion-card-header>
+            <ion-card-title>{{ artista.nombre }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ artista.descripcion }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

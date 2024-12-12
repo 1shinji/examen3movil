@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-img class="logo" slot="start" src="assets/icon/logo.png"></ion-img>
+    <ion-title>Compra y Venta de Entradas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="logo-container"></div>
+  <h2>Bienvenido, {{ username }}!</h2>
+  <p>¡Nos alegra que estés de vuelta en Compra y Venta de Entradas! Disfruta de nuestros próximos eventos y compra tus entradas ahora.</p>
+
+  <!-- Contenedor para la imagen de Jeff Buckley -->
+  <div class="image-container">
+    <img src="assets/icon/ticket.png" alt="Jeff Buckley" class="jeff-buckley-img">
+  </div>
+  <h1>¿Quiénes somos?</h1>
+  <p>¡Bienvenido a Compra y Venta de Entradas! Este es un lugar para gente que gusta de la buena música y de los conciertos.</p>
+
+  <!-- Mostrar ubicación -->
+  <h3>Ubicación Actual</h3>
+  <p *ngIf="latitude && longitude">
+    Latitud: {{ latitude }}<br>
+    Longitud: {{ longitude }}
+  </p>
+  <ion-button (click)="getCurrentLocation()">Actualizar Ubicación</ion-button>
+
+  <!-- Botón para abrir la cámara -->
+  <ion-button (click)="takePicture()" expand="block" shape="round" color="primary">
+    <ion-icon slot="start" name="camera"></ion-icon>Tomar Foto
+  </ion-button>
+
+  <!-- Vista previa de la imagen capturada -->
+  <div *ngIf="capturedImage">
+    <h3>Imagen Capturada:</h3>
+    <img [src]="capturedImage" alt="Captured Image" />
+  </div>
+
+  <!-- Botones adicionales (solo visibles si el usuario no está logueado) -->
+  <div class="fixed-bottom-buttons" *ngIf="!user">
+    <ion-button routerLink="/login" expand="block" shape="round" color="primary">
+      <ion-icon slot="start" name="log-in"></ion-icon>Iniciar Sesión
+    </ion-button>
+
+    <ion-button routerLink="/registro" expand="block" shape="round" color="secondary">
+      <ion-icon slot="start" name="person-add"></ion-icon>Registrarse
+    </ion-button>
+  </div>
+
+  <!-- Botón para ver eventos -->
+  <div class="fixed-bottom-buttons">
+    <ion-button (click)="navigateToEventos()" expand="block" shape="round" color="tertiary">
+      <ion-icon slot="start" name="musical-notes"></ion-icon>Ver Eventos
+    </ion-button>
+  </div>
+</ion-content> 

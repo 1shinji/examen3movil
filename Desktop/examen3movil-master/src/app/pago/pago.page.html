@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Completa tu Información de Pago</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form>
+        <ion-item>
+          <ion-label position="stacked">Nombre del Titular</ion-label>
+          <ion-input [(ngModel)]="nombreTitular" name="nombreTitular" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Número de Tarjeta</ion-label>
+          <ion-input 
+            [(ngModel)]="numeroTarjeta" 
+            name="numeroTarjeta" 
+            type="number" 
+            maxlength="16" 
+            (ionChange)="validarNumeroTarjeta()"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Fecha de Expiración</ion-label>
+          <div class="fecha-expiracion">
+            <ion-select 
+              placeholder="Mes" 
+              [(ngModel)]="mesExpiracion" 
+              name="mesExpiracion" 
+              interface="popover" 
+              required>
+              <ion-select-option *ngFor="let mes of meses" [value]="mes">{{ mes }}</ion-select-option>
+            </ion-select>
+            <ion-select 
+              placeholder="Año" 
+              [(ngModel)]="anioExpiracion" 
+              name="anioExpiracion" 
+              interface="popover" 
+              required>
+              <ion-select-option *ngFor="let anio of anios" [value]="anio">{{ anio }}</ion-select-option>
+            </ion-select>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">CVV</ion-label>
+          <ion-input [(ngModel)]="cvv" name="cvv" type="number" maxlength="3" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Total a Pagar</ion-label>
+          <ion-input [(ngModel)]="total" name="total" type="number" readonly></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" color="success" (click)="procesarPago()">
+          Pagar
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

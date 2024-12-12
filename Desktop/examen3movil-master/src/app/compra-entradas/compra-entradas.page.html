@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Compra de Entradas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Formulario de Compra -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Selecciona tu Evento</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form>
+        <ion-item>
+          <ion-label position="stacked">Evento</ion-label>
+          <ion-select [(ngModel)]="selectedEvent" name="selectedEvent" (ionChange)="setEventoDetalles()" placeholder="Selecciona un evento" required>
+            <ion-select-option value="radiohead">Radiohead</ion-select-option>
+            <ion-select-option value="thestrokes">The Strokes</ion-select-option>
+            <ion-select-option value="jeffbuckley">Jeff Buckley</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Cantidad de Entradas</ion-label>
+          <ion-input [(ngModel)]="ticketCount" (ionChange)="calcularPrecioTotal()" name="ticketCount" type="number" min="1" max="10" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Descripción</ion-label>
+          <ion-textarea [(ngModel)]="descripcion" name="descripcion" readonly></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Precio Total</ion-label>
+          <ion-input [(ngModel)]="precioTotal" name="precioTotal" type="number" readonly></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" (click)="agregarAlCarrito()" color="primary" shape="round">
+          Agregar al Carrito
+        </ion-button>
+        <ion-button *ngIf="isEditing" expand="block" (click)="cancelarEdicion()" color="medium" shape="round">
+          Cancelar Edición
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Carrito -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Carrito de Compras</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let entrada of carrito; let i = index" id="carrito-{{i}}">
+          <ion-label>
+            <h3>{{ entrada.evento | titlecase }}</h3>
+            <p>Cantidad: {{ entrada.cantidad }}</p>
+            <p>Descripción: {{ entrada.descripcion }}</p>
+            <p>Precio Total: {{ entrada.precio | currency }}</p>
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button fill="clear" color="warning" (click)="editarEntradaCarrito(entrada)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" color="danger" (click)="eliminarEntradaCarrito(i)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-list>
+
+      <ion-button *ngIf="carrito.length > 0" expand="block" (click)="comprarEntradas()" color="success" shape="round">
+        Comprar Entradas
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Toast -->
+  <ion-toast id="toast"></ion-toast>
+</ion-content>
